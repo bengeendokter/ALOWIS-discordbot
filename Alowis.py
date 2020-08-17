@@ -38,4 +38,4 @@ async def on_message(message):
 
 
 # laatste lijn
-client.run(os.environ.get('ALOWISBOT'))
+client.run(os.environ.get("ALOWISBOT"))
