@@ -9,7 +9,7 @@ client = discord.Client()
 async def on_member_join(member):
     for channel in member.guild.channels:
         if str(channel) == "ouders-café☕":
-            beschrijving = str(f"Welkom {member.name} in Café ALOWIS. "
+            beschrijving = str(f"Welkom **{member.name}** in Café ALOWIS. "
                                + "De plaats waar jij als ouder kan chatten met andere ouders, "
                                + "vragen kan stellen aan leiding en "
                                + "op de hoogte wordt gehouden van nieuwtjes binnen de scouts. "
