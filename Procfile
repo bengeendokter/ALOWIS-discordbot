@@ -1,1 +1,1 @@
-worker: python Alowis.py
+worker: python AlowisBotApplicatie.py
