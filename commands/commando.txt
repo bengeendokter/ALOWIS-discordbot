@@ -1,6 +1,0 @@
-!commando,titel,antwoord,categorie1;categorie2,kanaal1;kanaal2,user1;user2,beschrijving
-!drive,Link naar de leidingsdrive,https://drive.google.com/drive/folders/1QVF_1TXRfwHasr0Qwde_DiljD6XcrzWG?usp=sharing,Leiding ⚜;Comités 🛠,,,Geeft een link naar de leidingsdrive.
-!loeken,,-1,Leiding ⚜;Comités 🛠,,,Loeken Tatjen stuurt ons een random Alowis zinnetje: !loeken [getal] geeft specifieke zin
-!poll,,-1,Leiding ⚜;Comités 🛠,,,Maak een poll door met spaties gescheiden opties er achter te plaatsen: !poll [optie1] [optie2] … (max 8 opties)
-!dobbel,,-1,Leiding ⚜;Comités 🛠,,,Gooit een dobbelsteen.  Je kan max aantal ogen kiezen: !dobbel [getal] (standaard 6).
-!help,,-1,,,,Geeft alle mogelijke commando's voor een bepaalde gebruiker in een bepaald kanaal.

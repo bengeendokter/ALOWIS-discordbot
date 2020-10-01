@@ -5,7 +5,7 @@ from commands import special_commands # noqa
 # leest txt bestand en zet dit om in lijst
 def commando_list():
     # lees txt bestand en haal commano's hier uit
-    commands_txt = open("commands/commando.txt", "r", encoding="utf8")
+    commands_txt = open("commands/commando.csv", "r", encoding="utf8")
     first_line = commands_txt.readline()  # sla voorbeeld lijn over
     first_line += ""  # doet niets
 
@@ -20,7 +20,7 @@ def commando_list():
     for regel in commands_txt:
 
         # onderscheid de gegevens van elkaar in een lijst
-        lijst = regel.strip("\n").split(",")
+        lijst = regel.strip("\n").split("|")
 
         # verdeel elk gegeven verder en geef een duidelijke naam
         commando_str = lijst[0]
@@ -49,11 +49,23 @@ def commando_list():
     return commando_lst
 
 
+# dict met alle leiding voor wie is leiding cnt cmd
+leiding = \
+    {
+        "kapoenen": [":Ben:", ":Cedric:", ":Robbe:"],
+        "welpen": [":Senne:", ":Brecht:", ":Joshua:", ":Joachim:"],
+        "jong": [":DaanT:", ":Niels:", ":Boris:"],
+        "verkenner": [":Samuel:", ":Tom:", ":Joeri:"],
+        "jin": [":Servaas:"]
+    }
+
+
 class Bot:
 
-    def __init__(self):
+    def __init__(self, client):
         self.commando_lst = commando_list()
         self.message = None  # laatst verstuurde bericht
+        self.client = client
 
     # stuur bericht
     async def send(self, channel, bericht):
@@ -112,6 +124,11 @@ class Bot:
     async def commmando(self, message):
         if not message.author.bot:
             # commando niet hoofdletter gevoelig
+
+            # controleer of bericht dm is
+            if isinstance(message.channel, discord.channel.DMChannel):
+                return await self.dm(message)
+
             commando = str(message.content)
             if commando:  # voorkomt error bij volgende lijn moest string leeg zijn
                 if commando[0] == "!":  # als de string begint met "!"
@@ -135,3 +152,77 @@ class Bot:
                                     # stuur bericht
                                     bericht = discord.Embed(title=titel, description=antwoord)
                                     await self.send(message.channel, bericht)  # stuur antwoord
+
+                else:
+                    # indien geen commando, controleer op context commando
+                    await self.context_cmd(message)
+
+    # context commando
+    async def context_cmd(self, message):
+        tekst = message.content.lower()
+
+        # wie is leiding context commando
+        if "wie" in tekst and ("zijn" in tekst or "is" in tekst) \
+                and ("leiding" in tekst or "leider" in tekst):
+
+            found = False  # beginwaarde
+
+            # overloop takken
+            for tak in sorted(list(leiding.keys())):
+
+                if not found:
+                    if tak in tekst:
+                        taknaam = tak if tak is not "jong" else "jongverkenner"
+
+                        leiding_lst = leiding[tak]  # maak lijst met leiding namen
+                        laatste_persoon = leiding_lst[-1].replace(":", "")
+
+                        # bepaal is/zijn
+                        if len(leiding_lst) is not 1:
+                            personen = ", ".join(leiding_lst[:-1]).replace(":", "")
+                            antwoord = f"De {taknaam} leiding zijn {personen} en {laatste_persoon}"
+                        else:
+                            antwoord = f"De {taknaam} leiding is {laatste_persoon}"
+
+                        # stuur antwoord
+                        bericht = discord.Embed(title="", description=antwoord)
+                        await self.send(message.channel, bericht)
+
+                        # voeg emojis toe aan antwoord
+                        for persoon in leiding_lst:
+                            for emoji in message.guild.emojis:
+                                if persoon.strip(":") == emoji.name:
+
+                                    await self.reaction(emoji)
+
+                        # indien een tak gevonden, stop met zoeken
+                        found = True
+
+    # dm commando
+    async def dm(self, message):
+        admin_id = [262900122264797185]
+
+        recievers = [None]
+
+        # try to find reciever
+        if message.content[0] == "@" and message.author.id in admin_id:
+            id_user = int(message.content[1:19]) if message.content[1:19].isdigit() else None
+            recievers = [self.client.get_user(id_user)]
+
+        # send message to reciever
+        if recievers[0] is not None:
+            bericht = message.content[20:]
+            title = ""
+
+        else:  # forward message to admins
+            recievers = []
+            for id_reciever in admin_id:
+                recievers.append(self.client.get_user(id_reciever))
+            id_user = message.author.id
+            name_user = message.author.name
+            title = f"Dm from {name_user} ({id_user})"
+            bericht = message.content
+
+        # send message
+        for reciever in recievers:
+            await self.send(reciever, discord.Embed(title=title, description=bericht))
