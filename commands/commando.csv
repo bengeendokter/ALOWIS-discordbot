@@ -1,0 +1,13 @@
+!commando|titel|antwoord|categorie1;categorie2|kanaal1;kanaal2|user1;user2|beschrijving
+!drive|Link naar de leidingsdrive|https://drive.google.com/drive/folders/1QVF_1TXRfwHasr0Qwde_DiljD6XcrzWG?usp=sharing|Comités 🛠|||Geeft een link naar de leidingsdrive.
+!drive|Link naar de leidingsdrive|https://drive.google.com/drive/folders/1QVF_1TXRfwHasr0Qwde_DiljD6XcrzWG?usp=sharing|Leiding ⚜|leiding-café☕;jukebox||Geeft een link naar de leidingsdrive.
+!drive|Link naar de kapoenendrive|https://drive.google.com/drive/folders/1u6H4kbYYVt7C9-R9VcY7aqTZWafiHvuL?usp=sharing|Leiding ⚜|kapoenen||Geeft een link naar de kapoenendrive.
+!drive|Link naar de welpendrive|https://drive.google.com/drive/folders/14bUIo5A7GtaHkIp3m_tt4GKtAsw8tDoR?usp=sharing|Leiding ⚜|welpen||Geeft een link naar de welpendrive.
+!drive|Link naar de jongverkennersdrive|https://drive.google.com/drive/folders/1Jz4naywEYlHCTRAD3zKG1dNNyAQhsdy0?usp=sharing|Leiding ⚜|jongverkenners||Geeft een link naar de jongverkennersdrive.
+!drive|Link naar de verkennersdrive|https://drive.google.com/drive/folders/1KSkQRhPJwvFfVlUGm-DVdcZO5wXYNATh?usp=sharing|Leiding ⚜|verkenners||Geeft een link naar de verkennersdrive.
+!drive|Link naar de jinsdrive|https://drive.google.com/drive/folders/1m1m0K2p2A4xiSrdl7plHhqnTjNe9yyRe?usp=sharing|Leiding ⚜|jins||Geeft een link naar de jinsdrive.
+!poll||-1|Leiding ⚜;Comités 🛠|||Maak een poll door met spaties gescheiden opties er achter te plaatsen: !poll [optie1] [optie2] ... (max 8 opties)
+!loeken||-1|Leiding ⚜;Comités 🛠|||Loeken Tatjen stuurt ons een random Alowis zinnetje: !loeken [getal] geeft specifieke zin
+!dobbel||-1|Leiding ⚜;Comités 🛠|||Gooit een dobbelsteen.  Je kan max aantal ogen kiezen: !dobbel [getal] (standaard 6).
+!code|Link naar mijn code|https://github.com/wicling/alowisbot/commits/master|Leiding ⚜|||Geeft een link naar mijn huidige code en updates
+!help||-1||||Geeft alle mogelijke commando's voor een bepaalde gebruiker in een bepaald kanaal.
