@@ -1,4 +1,8 @@
 ### **Dit is de Alowisbot**
 
 _Todo:_
-* Open voor suggesties
+* navigatie menu
+* huisregel check
+* duid verschillen in naamgeving tss wiclingbot en alowisbot aan met #verander
+* changeable prefix
+* loeken veranderen in google docs ofzo

@@ -11,3 +11,4 @@
 !dobbel||-1|Leiding ⚜;Comités 🛠|||Gooit een dobbelsteen.  Je kan max aantal ogen kiezen: !dobbel [getal] (standaard 6).
 !code|Link naar mijn code|https://github.com/wicling/alowisbot/commits/master|Leiding ⚜|||Geeft een link naar mijn huidige code en updates
 !help||-1||||Geeft alle mogelijke commando's voor een bepaalde gebruiker in een bepaald kanaal.
+!kapoenen||-1||||Voegt de 'Ouder van kapoen' rol toe aan gebruiker

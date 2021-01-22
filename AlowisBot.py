@@ -72,11 +72,48 @@ class Bot:
         message = await channel.send(content=None, embed=bericht)
         self.message = message  # sla bericht op als laatst verstuurde bericht
 
-    # reactie functie
+    # bot voegt reactie toe functie
     async def reaction(self, emoji, message=None):
         if not message:
             message = self.message
         await message.add_reaction(emoji)
+
+    # bot ziet reaction add
+    async def reaction_add(self, payload):
+        message_id = payload.message_id
+        if message_id == 777223060288831509:
+            guild_id = payload.guild_id
+            guild = discord.utils.find(lambda g : g.id == guild_id, self.client.guilds)
+
+            if payload.emoji.name == "😉":
+                role = discord.utils.get(guild.roles, name="gelukt")
+                member = discord.utils.find(lambda m : m.id == payload.user_id, guild.members)
+                
+                
+                await self.role_add(role, member)
+
+
+    # bot ziet reaction remove
+    async def reaction_remove(self, payload):
+        message_id = payload.message_id
+        if message_id == 777223060288831509:
+            guild_id = payload.guild_id
+            guild = discord.utils.find(lambda g : g.id == guild_id, self.client.guilds)
+
+            if payload.emoji.name == "😉":
+                role = discord.utils.get(guild.roles, name="gelukt")
+                member = discord.utils.find(lambda m : m.id == payload.user_id, guild.members)
+                
+                
+                await self.role_remove(role, member)
+
+    # bot voegt rang toe
+    async def role_add(self, role, member):
+        await member.add_roles(role)
+
+    # bot verwijderd rang
+    async def role_remove(self, role, member):
+        await member.remove_roles(role)
 
     # welcome funtie
     async def welkomsbericht(self, member):
@@ -85,10 +122,10 @@ class Bot:
             for channel in member.guild.channels:
                 if str(channel) == "ouders-café☕":
                     beschrijving = str(f"Welkom **{member.name}** in Café ALOWIS. "
-                                       + "De plaats waar jij als ouder kan chatten met andere ouders, "
+                                       + "De plaats waar jij als ouder/lid kan chatten met anderen, "
                                        + "vragen kan stellen aan leiding en "
                                        + "op de hoogte wordt gehouden van nieuwtjes binnen de scouts. "
-                                       + "Verplaats u naar de juiste tak van uw zoon "
+                                       + "Verplaats u naar de juiste tak "
                                        + "of blijf gerust wat hangen in deze chat.\n\n"
                                        + "Stevige scoutslinker, de AlowisBot!")
 
@@ -172,13 +209,13 @@ class Bot:
 
                 if not found:
                     if tak in tekst:
-                        taknaam = tak if tak is not "jong" else "jongverkenner"
+                        taknaam = tak if tak != "jong" else "jongverkenner"
 
                         leiding_lst = leiding[tak]  # maak lijst met leiding namen
                         laatste_persoon = leiding_lst[-1].replace(":", "")
 
                         # bepaal is/zijn
-                        if len(leiding_lst) is not 1:
+                        if len(leiding_lst) != 1:
                             personen = ", ".join(leiding_lst[:-1]).replace(":", "")
                             antwoord = f"De {taknaam} leiding zijn {personen} en {laatste_persoon}"
                         else:

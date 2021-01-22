@@ -65,7 +65,7 @@ async def dobbel(specifiek_lst, message, bot):
     bericht = discord.Embed(title=getal)
     await bot.send(message.channel, bericht)
 
-
+# help functie
 async def help_cmd(specifiek_lst, message, bot):
     specifiek_lst += []  # doet niets
     bericht = discord.Embed(title=f"Commando's voor {message.author.name} in #{str(message.channel)}")
@@ -77,6 +77,15 @@ async def help_cmd(specifiek_lst, message, bot):
 
     await bot.send(message.channel, bericht)
 
+# kapoenen ouder rol functie
+async def kapoenen(specifiek_lst, message, bot):
+    guild_id = message.guild.id
+    guild = discord.utils.find(lambda g : g.id == guild_id, bot.client.guilds)
+
+    role = discord.utils.get(guild.roles, name="Ouder van kapoen")
+    member = discord.utils.find(lambda m : m.id == message.author.id, guild.members)
+                
+    await bot.role_add(role, member)
 
 # funtie dictionairy
 switcher = \
@@ -84,7 +93,8 @@ switcher = \
         "!loeken": loekentatjen,
         "!poll": poll,
         "!dobbel": dobbel,
-        "!help": help_cmd
+        "!help": help_cmd,
+        "!kapoenen": kapoenen
     }
 
 
