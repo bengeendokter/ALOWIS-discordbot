@@ -82,7 +82,7 @@ async def kapoenen(specifiek_lst, message, bot):
     guild_id = message.guild.id
     guild = discord.utils.find(lambda g : g.id == guild_id, bot.client.guilds)
 
-    role = discord.utils.get(guild.roles, name="gelukt")
+    role = discord.utils.get(guild.roles, name="Ouder van kapoen")
     member = discord.utils.find(lambda m : m.id == message.author.id, guild.members)
     
     bericht = discord.Embed(title=f"{message.author.nick} heeft nu de rol 'Ouder van kapoen'")
